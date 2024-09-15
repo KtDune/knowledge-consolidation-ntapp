@@ -1,11 +1,12 @@
-import NoteBlock from "./component/noteBlock/NoteBlock"
+
+import NoteDisplay from "./component/noteDisplay/NoteDisplay"
 
 
 function App() {
 
   return (
     <>
-      <NoteBlock title="first notebook" />
+      <NoteDisplay />
     </>
   )
 }
