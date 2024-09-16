@@ -3,7 +3,7 @@ import AddBlock from "../addBlock/AddBlock";
 import NoteBlock from "../noteBlock/NoteBlock";
 
 const useNoteDisplayHk = (): [() => ReactNode[], () => void, () => void] => {
-  const [notes, setNotes] = useState<string[]>(["Note 1", "Note 2"]);
+  const [notes, setNotes] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(0);
 
   const itemsPerRow = 8;
