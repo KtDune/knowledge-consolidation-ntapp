@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const useOpenEditNote = (): [boolean, () => void, () => void] => {
+export const useOpenEditNote = (): [boolean, () => void, () => void] => {
 
     const [open, setOpen] = useState<boolean>(false)
 
@@ -16,4 +16,23 @@ const useOpenEditNote = (): [boolean, () => void, () => void] => {
 
 }
 
-export default useOpenEditNote
+export const useNoteBlockState = (initialTitle: string, initialContent: string) => {
+    const [currentTitle, setCurrentTitle] = useState<string>(initialTitle);
+    const [content, setContent] = useState<string>(initialContent);
+  
+    const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setCurrentTitle(e.target.value);
+    };
+  
+    const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setContent(e.target.value);
+    }
+  
+    return {
+      currentTitle,
+      content,
+      handleTitleChange,
+      handleContentChange,
+    };
+  };
+  

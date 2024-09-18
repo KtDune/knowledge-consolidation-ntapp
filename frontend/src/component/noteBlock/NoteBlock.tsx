@@ -1,7 +1,7 @@
 // @ts-ignore
 import { MultiplicationSignIcon, NoteIcon } from 'hugeicons-react';
 import { useState } from 'react';
-import useOpenEditNote from './noteBlockHk';
+import { useOpenEditNote, useNoteBlockState } from './noteBlockHk';
 
 interface noteBlockProp {
   title: string;
@@ -9,20 +9,17 @@ interface noteBlockProp {
 
 const NoteBlock: React.FC<noteBlockProp> = ({ title }) => {
   const [open, openModel, closeModel] = useOpenEditNote()
-  const [currentTitle, setCurrentTitle] = useState<string>(title)
-  const [content, setContent] = useState<string>("This is the best day of ma life")
-
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrentTitle(e.target.value);
-  };
-
-  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(e.target.value);
-  };
+  
+  const {
+    currentTitle,
+    content,
+    handleTitleChange,
+    handleContentChange,
+  } = useNoteBlockState(title, "This is the best day of my life")
 
   const handleSave = () => {
-    closeModel();
-  };
+    closeModel()
+  }
 
   return (
     <>

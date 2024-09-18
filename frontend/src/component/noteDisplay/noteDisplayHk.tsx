@@ -3,15 +3,15 @@ import AddBlock from "../addBlock/AddBlock";
 import NoteBlock from "../noteBlock/NoteBlock";
 
 const useNoteDisplayHk = (): [() => ReactNode[], () => void, () => void] => {
-  const [notes, setNotes] = useState<string[]>([]);
+  const [notes, setNotes] = useState<string[]>([])
   const [currentPage, setCurrentPage] = useState<number>(0);
 
   const itemsPerRow = 8;
   const rowsPerPage = 3;
-  const itemsPerPage = itemsPerRow * rowsPerPage;
+  const itemsPerPage = itemsPerRow * rowsPerPage
 
   const addBlock = () => {
-    const newNote = `Note ${notes.length + 1}`
+    const newNote = `Untitled ${notes.length + 1}`
     setNotes([...notes, newNote])
   }
 
