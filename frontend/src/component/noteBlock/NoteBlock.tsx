@@ -5,10 +5,11 @@ import { useDrag } from 'react-dnd';
 import { ItemTypes } from '../Itemtype'
 
 interface noteBlockProp {
-  title: string;
+  title: string,
+  currentContent: string
 }
 
-const NoteBlock: React.FC<noteBlockProp> = ({ title }) => {
+const NoteBlock: React.FC<noteBlockProp> = ({ title, currentContent }) => {
   const [open, openModel, closeModel] = useOpenEditNote();
 
   const {
@@ -16,18 +17,16 @@ const NoteBlock: React.FC<noteBlockProp> = ({ title }) => {
     content,
     handleTitleChange,
     handleContentChange,
-  } = useNoteBlockState(title, 'This is the best day of my life');
+  } = useNoteBlockState(title, currentContent)   
 
   // Setup the useDrag hook
-  const [{ isDragging }, drag] = useDrag(
-    () => ({
+  const [{ isDragging }, drag] = useDrag(() => ({
       type: ItemTypes.Note_Block,
-      item: {title, content},
+      item: {title: currentTitle, content: content},
       collect: (monitor) => ({
         isDragging: !!monitor.isDragging(),
       }),
-    }),
-    [],
+    }), [currentTitle, content],
   )
 
   const handleSave = () => {
@@ -72,7 +71,6 @@ const NoteBlock: React.FC<noteBlockProp> = ({ title }) => {
               />
             </div>
 
-            {/* Modal footer */}
             <div className="flex justify-end">
               <button
                 onClick={handleSave}

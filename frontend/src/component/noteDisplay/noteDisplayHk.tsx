@@ -2,8 +2,13 @@ import { ReactNode, useState } from "react";
 import AddBlock from "../addBlock/AddBlock";
 import NoteBlock from "../noteBlock/NoteBlock";
 
+interface noteProp {
+  title: string,
+  currentContent: string
+}
+
 const useNoteDisplayHk = (): [() => ReactNode[], () => void, () => void] => {
-  const [notes, setNotes] = useState<string[]>(["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"])
+  const [notes, setNotes] = useState<noteProp[]>([{title: "Untitled 1", currentContent: "Jintia shi shang fen de hao ri zi"}])
   const [currentPage, setCurrentPage] = useState<number>(0);
 
   const itemsPerRow = 8;
@@ -11,11 +16,12 @@ const useNoteDisplayHk = (): [() => ReactNode[], () => void, () => void] => {
   const itemsPerPage = itemsPerRow * rowsPerPage
 
   const addBlock = () => {
-    const newNote = `Untitled ${notes.length + 1}`
-    setNotes([...notes, newNote])
+    const newtitle = `Untitled ${notes.length + 1}`
+    const newcontent = ''
+    setNotes([...notes, {title: newtitle, currentContent: newcontent}])
   }
 
-  const getPaginatedNotes = (): string[] => {
+  const getPaginatedNotes = (): noteProp[] => {
     const startIndex = currentPage * itemsPerPage
     const endIndex = startIndex + itemsPerPage
 
@@ -28,7 +34,7 @@ const useNoteDisplayHk = (): [() => ReactNode[], () => void, () => void] => {
 
     // Add all notes as NoteBlock components
     paginatedNotes.forEach((note, index) => { // Find the index of 0
-        blocks.push(<NoteBlock key={index} title={note} />)
+        blocks.push(<NoteBlock key={index} title={note.title} currentContent={note.currentContent} />)
     })
 
     if (paginatedNotes.length < itemsPerPage) {
