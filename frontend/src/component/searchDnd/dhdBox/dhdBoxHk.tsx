@@ -30,9 +30,9 @@ export const useDHDBOXHk = (): UseDHDBOXHkReturn => {
       if (prevList.length < 3 && !isTheSame(item, prevList)) {
         return [...prevList, item];
       }
-      return prevList;
-    });
-  };
+      return prevList
+    })
+  }
 
   const removeFromList = (item: hookProp) => {
     const newList: hookProp[] = list.filter((i) => i !== item);

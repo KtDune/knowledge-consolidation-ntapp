@@ -5,7 +5,7 @@ import { useDHDBOXHk } from "./dhdBoxHk"
 const DhdBox: React.FC = () => {
 
   const [{ isOver, canDrop }, drop] = useDrop(() => ({
-    accept: ItemTypes.Note_Block, // Define what type of items this box can accept.
+    accept: ItemTypes.Note_Block, 
     drop: (item: {title: string, content: string}) => handleDrop(item), 
     collect: (monitor) => ({
       isOver: !!monitor.isOver(), // Track if an item is being dragged over this box.
@@ -13,9 +13,7 @@ const DhdBox: React.FC = () => {
     }),
   }))
 
-  // This function will handle the drop logic.
   const handleDrop = (item: any) => {
-    // You can update state here or trigger any action you want when an item is dropped.
     addToList(item)
   }
 
