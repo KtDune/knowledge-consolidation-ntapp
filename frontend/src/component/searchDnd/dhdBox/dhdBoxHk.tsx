@@ -1,5 +1,5 @@
 import { ReactNode, useState } from "react"
-import NoteBlock from "../../noteBlock/NoteBlock";
+import RemovableNoteBlock from "../../removeableNoteBlock/removableNoteBlock";
 
 export interface hookProp {
   title: string;
@@ -8,40 +8,56 @@ export interface hookProp {
 
 interface UseDHDBOXHkReturn {
   list: hookProp[];
-  renderBlock: () => ReactNode
-  addToList: (item: hookProp) => void
-  removeFromList: (item: hookProp) => void
+  renderBlock: () => ReactNode;
+  addToList: (item: hookProp) => void;
+  removeFromList: (item: hookProp) => void;
   emptyList: () => void;
 }
 
 export const useDHDBOXHk = (): UseDHDBOXHkReturn => {
-  const [list, setList] = useState<hookProp[]>([])
+  const [list, setList] = useState<hookProp[]>([]);
+
+  // Helper function to check if there's a duplicate
+  const isTheSame = (item: hookProp, listToCheck: hookProp[]) => {
+    return listToCheck.some(
+      (value) => item.title === value.title && item.content === value.content
+    );
+  };
 
   const addToList = (item: hookProp) => {
-    console.log(item)
-    if (list.length < 3) {
-      setList((prevList) => [...prevList, item])
-    }
-  }
+    setList((prevList) => {
+      // Check against the current list (prevList) to avoid duplicates
+      if (prevList.length < 3 && !isTheSame(item, prevList)) {
+        return [...prevList, item];
+      }
+      return prevList;
+    });
+  };
 
   const removeFromList = (item: hookProp) => {
-    const newList: hookProp[] = list.filter(i => i !== item)
-    setList(newList)
-  }
+    const newList: hookProp[] = list.filter((i) => i !== item);
+    setList(newList);
+  };
 
   const emptyList = () => {
-    setList([])
-  }
+    setList([]);
+  };
 
   const renderBlock = (): ReactNode => {
     return (
       <>
         {list.map((item, index) => (
-          <NoteBlock key={index} title={item.title} currentContent={item.content} />
+          <RemovableNoteBlock
+            key={index}
+            title={item.title}
+            onClick={() => {
+              removeFromList(list[index]);
+            }}
+          />
         ))}
       </>
-    )
-  }
+    );
+  };
 
-  return { list, renderBlock, addToList, removeFromList, emptyList }
-}
+  return { list, renderBlock, addToList, removeFromList, emptyList };
+};

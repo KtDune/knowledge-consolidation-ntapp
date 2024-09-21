@@ -19,7 +19,7 @@ const DhdBox: React.FC = () => {
     addToList(item)
   }
 
-  const {list, addToList, renderBlock, removeFromList, emptyList} = useDHDBOXHk()
+  const {list, addToList, renderBlock} = useDHDBOXHk()
 
   return (
 <div
