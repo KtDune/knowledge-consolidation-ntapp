@@ -1,5 +1,5 @@
 import { ReactNode, useState } from "react"
-import RemovableNoteBlock from "../../removeableNoteBlock/removableNoteBlock";
+import RemovableNoteBlock from "../../removeableNoteBlock/removableNoteBlock"
 
 export interface hookProp {
   title: string;
@@ -15,7 +15,8 @@ interface UseDHDBOXHkReturn {
 }
 
 export const useDHDBOXHk = (): UseDHDBOXHkReturn => {
-  const [list, setList] = useState<hookProp[]>([]);
+
+  const [list, setList] = useState<hookProp[]>([])
 
   // Helper function to check if there's a duplicate
   const isTheSame = (item: hookProp, listToCheck: hookProp[]) => {

@@ -1,10 +1,20 @@
-import QueryComponent from '../../QueryComponent/QueryComponent';
-import { useSearch } from '../searchBox/searchBoxHk';
-import { Search01Icon } from 'hugeicons-react';
+import { Search01Icon } from "hugeicons-react";
+import QueryComponent from "../../QueryComponent/QueryComponent";
+import { useSearch } from "./searchBoxHk";
 
-const SearchBox: React.FC = () => {
+interface HookProp {
+  title: string;
+  content: string;
+}
 
-  const { query, handleInputChange, showQueryComponent, setShowQueryComponent } = useSearch()
+interface SearchBoxProps {
+  itemList: HookProp[];
+}
+
+const SearchBox: React.FC<SearchBoxProps> = ({ itemList }) => {
+  const { query, handleInputChange, showQueryComponent, setShowQueryComponent } = useSearch();
+
+  const list = itemList
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -28,7 +38,7 @@ const SearchBox: React.FC = () => {
         </div>
       </div>
 
-      {showQueryComponent && <QueryComponent query={query} setShowQueryComponent={setShowQueryComponent} />}
+      {showQueryComponent && <QueryComponent query={query} list={list} setShowQueryComponent={setShowQueryComponent} />}
     </div>
   );
 };

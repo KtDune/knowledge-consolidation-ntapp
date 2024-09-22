@@ -1,20 +1,23 @@
-import { useState, useEffect } from 'react';
-import { useDHDBOXHk } from '../searchDnd/dhdBox/dhdBoxHk'
+import { useState, useEffect } from 'react'
 
-export const useFetchApi = (query: string) => {
+export interface hookProp {
+    title: string;
+    content: string;
+  }
 
-  const { list } = useDHDBOXHk()
-  console.log(list)
+export const useFetchApi = (query: string, list: {}) => {
 
   const [response, setResponse] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
+  
+  console.log(list)
 
   // Function to simulate API request
   const fetchApiResponse = async (query: string) => {
     try {
       const apiResponse = await new Promise<string>((resolve) =>
-        setTimeout(() => resolve(`Response for query: ${query}`), 2000)
+        setTimeout(() => resolve(`Response for query: ${list}`), 2000)
       );
       setResponse(apiResponse);
     } catch (err) {
