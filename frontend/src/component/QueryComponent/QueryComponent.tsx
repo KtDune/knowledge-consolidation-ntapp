@@ -1,14 +1,14 @@
-import { useFetchApi } from './queryCopHk'
+import { HookProp, useTextApi } from './queryCopHk'
 
 interface QueryComponentProps {
   query: string;
-  list: {}
+  list: HookProp[]
   setShowQueryComponent: () => void
 }
 
 const QueryComponent: React.FC<QueryComponentProps> = ({ query, list, setShowQueryComponent }) => {
 
-  const { response, loading, error } = useFetchApi(query, list)
+  const { response, loading, error } = useTextApi(query, list)
 
 
   return (
