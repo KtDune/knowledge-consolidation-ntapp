@@ -34,8 +34,7 @@ const useNoteDisplayHk = (): [() => ReactNode[], () => void, () => void] => {
     const blocks: ReactNode[] = []
 
     // Add all notes as NoteBlock components
-    paginatedNotes.map((note, index) => {0
-      console.log(note)
+    paginatedNotes.map((note, _) => {
         blocks.push(<NoteBlock key={uuidv4()} title={note.title} currentContent={note.currentContent} />)
     })
 

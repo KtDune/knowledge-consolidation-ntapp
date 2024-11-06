@@ -1,6 +1,6 @@
-import { Search01Icon } from "hugeicons-react";
-import QueryComponent from "../../QueryComponent/QueryComponent";
+import { Search01Icon } from "hugeicons-react"
 import { useSearch } from "./searchBoxHk";
+import { useNavigate } from "react-router-dom"
 
 interface HookProp {
   title: string;
@@ -11,10 +11,28 @@ interface SearchBoxProps {
   itemList: HookProp[];
 }
 
-const SearchBox: React.FC<SearchBoxProps> = ({ itemList }) => {
-  const { query, handleInputChange, showQueryComponent, setShowQueryComponent } = useSearch();
+interface sessionStructure {
+  searchQuery: string,
+  noteList: HookProp[]
+}
 
-  const list = itemList
+const SearchBox: React.FC<SearchBoxProps> = ({ itemList }) => {
+  const { query, handleInputChange } = useSearch();
+
+  const list = itemList;
+
+  const navigate = useNavigate()
+
+  const toQueryPage = () => {
+
+    const sessionValue: sessionStructure = {
+      searchQuery: query,
+      noteList: itemList
+    }
+
+    sessionStorage.setItem("sessionValue", JSON.stringify(sessionValue))
+
+  }
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -30,15 +48,13 @@ const SearchBox: React.FC<SearchBoxProps> = ({ itemList }) => {
           />
 
           <button
-            onClick={() => setShowQueryComponent()} 
+            onClick={() => navigate('/query')}  
             className="px-4 py-2 bg-blue-600 text-white rounded-r-md hover:bg-blue-700"
           >
             <Search01Icon size={24} color={"#000000"} />
           </button>
         </div>
       </div>
-
-      {showQueryComponent && <QueryComponent query={query} list={list} setShowQueryComponent={setShowQueryComponent} />}
     </div>
   );
 };
