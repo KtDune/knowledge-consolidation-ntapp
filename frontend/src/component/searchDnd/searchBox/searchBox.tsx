@@ -27,10 +27,11 @@ const SearchBox: React.FC<SearchBoxProps> = ({ itemList }) => {
 
     const sessionValue: sessionStructure = {
       searchQuery: query,
-      noteList: itemList
+      noteList: list
     }
 
     sessionStorage.setItem("sessionValue", JSON.stringify(sessionValue))
+    navigate('/query')
 
   }
 
@@ -48,7 +49,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ itemList }) => {
           />
 
           <button
-            onClick={() => navigate('/query')}  
+            onClick={toQueryPage}  
             className="px-4 py-2 bg-blue-600 text-white rounded-r-md hover:bg-blue-700"
           >
             <Search01Icon size={24} color={"#000000"} />
