@@ -3,7 +3,13 @@ import { MultiplicationSignIcon, NoteIcon } from 'hugeicons-react';
 import { useOpenEditNote, useNoteBlockState } from './noteBlockHk';
 import { useDrag } from 'react-dnd';
 import { ItemTypes } from '../Itemtype'
-import { updateNoteBlock } from '../../firebaseORM';
+import { updateNoteBlock, deleteNoteBlock } from '../../firebaseORM'
+import {
+  Menu,
+  Item,
+  useContextMenu,
+} from "react-contexify";
+import "react-contexify/dist/ReactContexify.css";
 
 interface noteBlockProp {
   id: string;
@@ -12,12 +18,27 @@ interface noteBlockProp {
 }
 
 const NoteBlock: React.FC<noteBlockProp> = ({ id, title, currentContent }) => {
+
   const [open, openModel, closeModel] = useOpenEditNote();
 
+  //where previous data is saved (to prevent data from being saved to db when 'x' is clicked)
   const [savedTitle, setSavedTitle] = useState(title);
   const [savedContent, setSavedContent] = useState(currentContent);
 
   const { currentTitle, content, handleTitleChange, handleContentChange } = useNoteBlockState(savedTitle, savedContent);
+
+  //show context menu
+  const { show } = useContextMenu({
+    id: id
+  }) 
+
+  function displayMenu(e: any){
+    // put whatever custom logic you need
+    // you can even decide to not display the Menu
+    show({
+      event: e,
+    });
+  }
 
   // Setup the useDrag hook
   const [{ isDragging }, drag] = useDrag(() => ({
@@ -46,6 +67,7 @@ const NoteBlock: React.FC<noteBlockProp> = ({ id, title, currentContent }) => {
       <div
         ref={drag}
         onClick={openModel}
+        onContextMenu={displayMenu}
         className={`min-w-40 min-h-40 max-w-40 max-h-40 p-6 bg-white border-2 border-black rounded-lg shadow hover:bg-gray-100 hover:cursor-pointer flex flex-col items-center ${isDragging ? 'opacity-50' : ''}`}
       >
         <NoteIcon size={50} color="#000000" />
@@ -90,6 +112,13 @@ const NoteBlock: React.FC<noteBlockProp> = ({ id, title, currentContent }) => {
           </div>
         </div>
       )}
+
+      <Menu id={id}>
+        <Item onClick={() => {
+          deleteNoteBlock(id)
+        }}>
+          Delete</Item>
+      </Menu>
     </>
   );
 };
