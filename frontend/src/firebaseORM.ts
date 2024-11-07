@@ -1,11 +1,12 @@
 import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase"
-
-const collectionRef = collection(db, "NoteBlock")
+import { v4 as uuidv4 } from 'uuid';
 
 export const createNoteBlock: (title: string, content: string) => Promise<void> = async (title, content) => {
     try {
-        await setDoc(doc(collectionRef, new Date(8.64e15).toString()), {
+        const collectionRef = collection(db, "NoteBlock")
+
+        await setDoc(doc(collectionRef, uuidv4()), {
             title,
             content
         });
@@ -29,8 +30,13 @@ export const readNoteBlock: (id: string) => Promise<{}> = async (id) => {
 export const readAllNoteBlock = async () => {
     
     const docSnap = await getDocs(collection(db, "NoteBlock"))
+    const docs: {id: string, title: string, currentContent: string}[] = docSnap.docs.map((doc) => ({
+        id: doc.id,
+        title: doc.data().title,
+        currentContent: doc.data().content
+    }))
 
-    return docSnap
+    return docs
 
 }
 
