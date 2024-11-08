@@ -1,6 +1,7 @@
 # Knowledge Consolidation Note Taking App
 
-#Clone the project
+## Clone the project
+
 This app allows the user to implement the knowledge consolidation learning method to increase productivity.
 
 In order to use this code, you have to clone this project in a new folder/directory.
@@ -11,7 +12,7 @@ In order to use this code, you have to clone this project in a new folder/direct
 4. Type `git clone https://github.com/KtDune/knowledge-consolidation-ntapp` (optionally, copy my GitHub URL in case this does not work)
 5. You will see a new folder created. Use a code editor to open that folder.
 
-#Setup
+## Setup
 Inside `/frontend` directory, createa .env file and add your api key to the coressponding env variables. (Go to https://firebase.google.com/docs/web/setup to see how to get your firebase api key.)
 
 ```
