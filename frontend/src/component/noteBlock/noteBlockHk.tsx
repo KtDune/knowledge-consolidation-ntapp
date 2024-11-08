@@ -18,7 +18,7 @@ export const useOpenEditNote = (): [boolean, () => void, () => void] => {
 
 export const useNoteBlockState = (initialTitle: string, initialContent: string) => {
     const [currentTitle, setCurrentTitle] = useState<string>(initialTitle);
-    const [content, setContent] = useState<string>(initialContent);
+    const [content, setContent] = useState<string>(initialContent)
   
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setCurrentTitle(e.target.value);
@@ -32,7 +32,7 @@ export const useNoteBlockState = (initialTitle: string, initialContent: string) 
       currentTitle,
       content,
       handleTitleChange,
-      handleContentChange,
+      handleContentChange,        
     };
   };
   
