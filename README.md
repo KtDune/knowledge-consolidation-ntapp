@@ -1,8 +1,8 @@
 # Knowledge Consolidation Note Taking App
 
-## Clone the project
-
 This app allows the user to implement the knowledge consolidation learning method to increase productivity.
+
+## Clone the project
 
 In order to use this code, you have to clone this project in a new folder/directory.
 
@@ -13,7 +13,7 @@ In order to use this code, you have to clone this project in a new folder/direct
 5. You will see a new folder created. Use a code editor to open that folder.
 
 ## Setup
-Inside `/frontend` directory, createa .env file and add your api key to the coressponding env variables. (Go to https://firebase.google.com/docs/web/setup to see how to get your firebase api key.)
+Inside `/frontend` directory, create a .env file and add your api key to the coressponding env variables. (Go to https://firebase.google.com/docs/web/setup to see how to get your firebase api key.)
 
 ```
 #FIREBASE API KEY ADD YOUR API KEY HERE
